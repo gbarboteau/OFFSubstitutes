@@ -2,7 +2,14 @@ import database
 from util import is_integer
 
 class Program:
+    """Parent class of ProgramTerminal.
+    Not used for now as ProgramGraphic isn't
+    implemented yet.
+    """
     def __init__(self, my_auth):
+        """The constructor is common to ProgramTerminal
+        and ProgramGraphic.
+        """
         self.dt = database.Database(my_auth)
         self.state = "LaunchScreen"
         self.currentCategory = ""
@@ -11,15 +18,19 @@ class Program:
         self.currentAssociation = ""
 
 class ProgramTerminal(Program):
-
+    """Allow to launch and use the program 
+    in a terminal window.
+    """
     def launch(self):
+        """Launch the program in a terminal window.
+        Checks for inputs and current state, and changes
+        what's is displayed according to these.
+        """
         print("\n")
 
         user_input = ""
 
         while user_input.lower() != "q":
-            """
-            """
             if self.state == "LaunchScreen":
                 """Quand le programme démarre ou qu'on retourne
                 à l'écran d'accueil
@@ -33,8 +44,6 @@ class ProgramTerminal(Program):
                 if user_input.lower() == "3" or user_input.lower() == "q":
                     self.state = "Bye"
 
-                
-
             if self.state == "SearchForCategory":
                 """Le programme du choix de la 
                 catégorie dans laquelle chercher l'aliment
@@ -42,7 +51,6 @@ class ProgramTerminal(Program):
                 print("Voici les substituts mis à votre disposition:\n")
                 print (self.dt.all_categories_stringed)
                 user_input = input("Entrez le chiffre correspondant à la catégorie désirée, R pour retourner à l'écran précédent, ou Q pour quitter le programme\n")
-
                 if is_integer(user_input):
                     if 1 <= int(user_input) <= len(self.dt.all_categories) +1:
                         self.currentCategory = self.dt.all_categories[int(user_input) - 1]
@@ -64,7 +72,6 @@ class ProgramTerminal(Program):
                 print("Bienvenue dans la catégorie " + self.currentCategory + "\n")
                 print(self.dt.all_aliments_from_category_stringed)
                 user_input = input("Entrez le chiffre correspondant au produit désiré, R pour retourner à l'écran précédent, ou Q pour quitter le programme\n")
-
                 if is_integer(user_input):
                     if 1 <= int(user_input) <= len(self.dt.all_aliments_from_category) +1:
                         self.currentProduct = self.dt.all_aliments_from_category[int(user_input) - 1]
@@ -79,19 +86,15 @@ class ProgramTerminal(Program):
                     else:
                         print("Commande invalide, réessayez!\n")
 
-
-
             if self.state == "SearchForSubstitute":
                 """Le programme qui affiche l'aliment
                 et ses substituts
                 """
                 self.dt.get_aliment(self.currentProduct)
                 print(self.dt.this_aliment_stringed + "\n\n")
-
                 self.dt.get_all_substitutes(self.currentProduct, self.currentCategory, self.dt.this_aliment[4])
                 print(self.dt.all_substitutes_stringed)
                 user_input = input("Entrez le chiffre correspondant au substitut désiré, R pour retourner à l'écran précédent, ou Q pour quitter le programme\n")
-
                 if is_integer(user_input):
                     if 1 <= int(user_input) <= len(self.dt.all_substitutes) +1:
                         self.currentSubstitute = self.dt.all_substitutes[int(user_input) - 1]
@@ -105,8 +108,6 @@ class ProgramTerminal(Program):
                         self.state = "SearchForAliment"
                     else:
                         print("Commande invalide, réessayez!\n")
-
-
 
             if self.state == "OnFoundSubstitute":
                 print("C'est gagné ! Aliment : " + self.currentSubstitute)
@@ -123,7 +124,6 @@ class ProgramTerminal(Program):
                 else:
                     print("Commande invalide, réessayez!\n")
 
-
             if self.state == "SaveAssociation":
                 self.dt.save_association(self.currentSubstitute, self.currentProduct)
                 print("\nAssociation sauvegardée ! Vous pouvez la consulter depuis le menu principal.\n")
@@ -138,12 +138,10 @@ class ProgramTerminal(Program):
                 else:
                     print("Commande invalide, réessayez!\n")
 
-
             if self.state == "LookAtSubstitutes":
                 self.dt.update_my_associations()
                 print(self.dt.all_associations_stringed)
                 user_input = input("Entrez le chiffre correspondant au substitut désiré, R pour retourner à l'écran précédent, ou Q pour quitter le programme\n")
-
                 if is_integer(user_input):
                     if 1 <= int(user_input) <= len(self.dt.all_associations) +1:
                         self.currentAssociation = self.dt.all_associations[int(user_input) - 1]
@@ -157,7 +155,6 @@ class ProgramTerminal(Program):
                         self.state = "LaunchScreen"
                     else:
                         print("Commande invalide, réessayez!\n")
-
 
             if self.state == "LookAtOneSubstitute":
                 alim1 = self.dt.get_product_by_id(self.currentAssociation[1])
@@ -179,7 +176,6 @@ class ProgramTerminal(Program):
                 else:
                     print("Commande invalide, réessayez!\n")
 
-
             if self.state == "DeleteAssociation":
                 self.dt.delete_association(self.currentAssociation[0])
                 print("Voilà qui est fait !\n")
@@ -194,7 +190,6 @@ class ProgramTerminal(Program):
                     self.state = "LaunchScreen"
                 else:
                     print("Commande invalide, réessayez!\n")
-
 
             if self.state == "Bye":
                 pass

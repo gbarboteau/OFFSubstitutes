@@ -7,6 +7,12 @@ from statemachine import States
 class TerminalStateMachine:
     def __init__(self, my_auth):
         self.dt = database.Database(my_auth)
+        self.state = ""
+        self.currentCategory = ""
+        self.currentProduct = ""
+        self.currentSubstitute = ""
+        self.currentAssociation = ""
+        self.state = States.LaunchScreen
 
     def state_launchscreen(self):
         """The menu screen. Appears when the

@@ -19,6 +19,7 @@ class Database:
         self.this_substitute_stringed = ""
         self.all_associations = self.find_associations()
         self.all_associations_stringed = ""
+        self.all_associations_list_stringed = []
         self.find_associations_string()
 
     def find_categories(self):
@@ -131,10 +132,12 @@ class Database:
 
     def find_associations_string(self):
         self.all_associations_stringed = ""
+        self.all_associations_list_stringed = []
         for i in range(1, len(self.all_associations) +1):
             aliment_string = self.get_product_by_id(self.all_associations[i-1][1])[1]
             substitude_string = self.get_product_by_id(self.all_associations[i-1][2])[1]
             self.all_associations_stringed = self.all_associations_stringed + str(i) + ") " + aliment_string + " / " + substitude_string + "\n"
+            self.all_associations_list_stringed.append(aliment_string + " / " + substitude_string + "\n")
 
     def update_my_associations(self):
         """Update the associations list after creating

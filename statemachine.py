@@ -1,6 +1,11 @@
+"""A state machine with every different state
+of the program. 
+"""
 from enum import Enum
 
+
 class States(Enum):
+    """An enumeration of every possible state."""
     LaunchScreen = "LaunchScreen"
     SearchForCategory = "SearchForCategory"
     SearchForAliment = "SearchForAliment"
@@ -11,3 +16,4 @@ class States(Enum):
     LookAtOneSubstitute = "LookAtOneSubstitute"
     DeleteAssociation = "DeleteAssociation"
     Bye = "Bye"
+    

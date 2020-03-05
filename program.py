@@ -1,11 +1,14 @@
+"""The program providing users a list of aliments
+and their possible substitutes. Launched through
+main.py.
+"""
 import sys
 import tkinter as tk
 
-# import database
 import terminalstate
 import graphicstate
 from statemachine import States
-# from util import is_integer
+
 
 class Program:
     """Parent class of ProgramTerminal.
@@ -35,6 +38,26 @@ class ProgramGraphic(Program):
     def launch(self):
 
         self.sm.mainloop()
+        # if self.sm.state == States.LaunchScreen:
+        #     self.sm.state_launchscreen()
+        # if self.sm.state == States.SearchForCategory:
+        #     self.sm.state_searchforcategory()
+        # if self.sm.state == States.SearchForAliment:
+        #     self.sm.state_searchforaliment()
+        # if self.sm.state == States.SearchForSubstitute:
+        #     self.sm.state_searchforsubstitute()
+        # if self.sm.state == States.OnFoundSubstitute:
+        #     self.sm.state_onfoundsubstitute()
+        # if self.sm.state == States.SaveAssociation:
+        #     self.sm.state_saveassociation()
+        # if self.sm.state == States.LookAtSubstitutes:
+        #     self.sm.state_lookatsubstitutes()
+        # if self.sm.state == States.LookAtOneSubstitute:
+        #     self.sm.state_lookatonesubstitute()
+        # if self.sm.state == States.DeleteAssociation:
+        #     self.sm.state_deleteassociation()
+        # if self.sm.state == States.Bye:
+        #     self.sm.state_bye()
         # while 1:
         #     if self.sm.state == States.LaunchScreen:
         #         self.sm.state_launchscreen()

@@ -1,12 +1,29 @@
+"""Handle the different state of the program
+when it's launched in terminal mode.
+"""
 import sys
 
 import database
 from util import is_integer
 from statemachine import States
 
+
 class TerminalStateMachine:
+    """Create an instance of a state machine
+    handling states in terminal mode.
+    """
     def __init__(self, my_auth):
+        """Initialize the instance.
+        The strings are what is shown in terminal,
+        we update them as we change states.
+        """
         self.dt = database.Database(my_auth)
+        self.state = ""
+        self.currentCategory = ""
+        self.currentProduct = ""
+        self.currentSubstitute = ""
+        self.currentAssociation = ""
+        self.state = States.LaunchScreen
 
     def state_launchscreen(self):
         """The menu screen. Appears when the

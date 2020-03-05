@@ -19,13 +19,16 @@ def main():
     my_auth = Auth()
     parser.add_argument("user", help="is the user for the database")
     parser.add_argument("-t", "--terminal", help="Launches the program in terminal mode", action="store_true")
+    parser.add_argument("-g", "--graphic", help="Launches the program in graphic mode", action="store_true")
     args = parser.parse_args()
     my_auth.user = args.user
     my_auth.password = getpass.getpass()
     if args.terminal:
         pr = ProgramTerminal(my_auth)
+    elif args.graphic:
+        pr = ProgramGraphic(my_auth)
     else:
-        pr = ProgramTerminal(my_auth)
+        pr = ProgramGraphic(my_auth)
     pr.launch()
 
 main();

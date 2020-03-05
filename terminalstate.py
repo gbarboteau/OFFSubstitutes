@@ -106,7 +106,6 @@ class TerminalStateMachine:
             else:
                 print("Commande invalide, réessayez!\n")
 
-
     def state_onfoundsubstitute(self):
         """Show the screen allowing the user
         to examine a substitute for a specific
@@ -116,7 +115,6 @@ class TerminalStateMachine:
         self.dt.get_this_substitute(self.currentSubstitute, self.currentProduct)
         print(self.dt.this_substitute_stringed + "\n")
         user_input = input("Entrez S pour sauvegarder cette association, R pour retourner à l'écran précédent, ou Q pour quitter le programme\n")
-
         if user_input.lower() == "q":
             self.state = States.Bye
         elif user_input.lower() == "r":
@@ -126,7 +124,6 @@ class TerminalStateMachine:
         else:
             print("Commande invalide, réessayez!\n")
 
-
     def state_saveassociation(self):
         """Show the screen indicating a substitute
         for a specific food has been saved.
@@ -134,7 +131,6 @@ class TerminalStateMachine:
         self.dt.save_association(self.currentSubstitute, self.currentProduct)
         print("\nAssociation sauvegardée ! Vous pouvez la consulter depuis le menu principal.\n")
         user_input = input("Entrez M pour retourner au menu principal, R pour retourner à l'écran des substituts disponibles, ou Q pour quitter le programme\n")
-
         if user_input.lower() == "q":
             self.state = States.Bye
         elif user_input.lower() == "r":
@@ -180,7 +176,6 @@ class TerminalStateMachine:
         print("Nous vous proposons à la place :\n")
         print(alim2_stringed)
         user_input = input("Entrez R pour retourner à l'écran précédent, S pour supprimer l'association, ou Q pour quitter le programme\n")
-
         if user_input.lower() == "q":
             self.state = States.Bye
         elif user_input.lower() == "r":
@@ -196,9 +191,7 @@ class TerminalStateMachine:
         """
         self.dt.delete_association(self.currentAssociation[0])
         print("Voilà qui est fait !\n")
-
         user_input = input("Entrez R pour retourner à l'écran des substituts, M pour le menu principal, ou Q pour quitter le programme\n")
-
         if user_input.lower() == "q":
             self.state = States.Bye
         elif user_input.lower() == "r":

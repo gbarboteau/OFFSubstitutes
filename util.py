@@ -1,8 +1,6 @@
 """Some useful functions abstract enough
 to be used into several scripts.
 """
-
-
 def is_integer(string_to_check):
     """Check if a command entered on the command
     line is a number or not.

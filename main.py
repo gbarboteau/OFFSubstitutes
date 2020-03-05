@@ -36,6 +36,5 @@ def main():
         pr.launch()
     except mysql.connector.errors.ProgrammingError:
         print("This user/password combination doesn't exist! Try another combination.")
-    
 
 main();

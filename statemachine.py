@@ -16,4 +16,3 @@ class States(Enum):
     LookAtOneSubstitute = "LookAtOneSubstitute"
     DeleteAssociation = "DeleteAssociation"
     Bye = "Bye"
-    

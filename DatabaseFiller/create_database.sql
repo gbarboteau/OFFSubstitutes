@@ -14,12 +14,12 @@ CREATE TABLE Category(
 
 CREATE TABLE Aliment (
     id int unsigned NOT NULL AUTO_INCREMENT,
-    product_name varchar(100) NOT NULL,             -- "product_name_fr"
-    product_description text,                       -- "ingredients_text_with_allergens"
-    barcode varchar(20) NOT NULL,                   -- "id"
-    nutritional_score char(1) NOT NULL,             -- "nutrition_grades"
-    stores varchar(200),                            -- "stores"
-    product_category varchar(100) NOT NULL,       -- "Categories"
+    product_name varchar(100) NOT NULL,
+    product_description text,
+    barcode varchar(20) NOT NULL,
+    nutritional_score char(1) NOT NULL,
+    stores varchar(200),
+    product_category varchar(100) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY product_name (product_name),
     CONSTRAINT fk_product_category FOREIGN KEY (product_category) REFERENCES Category(category_name)

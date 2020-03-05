@@ -1,10 +1,16 @@
+"""Handles every call to our database."""
 import mysql.connector
 
 from util import list_to_num_string
 
 
 class Database:
+    """A class handling interactions with our
+    database. Read data and write in the
+    'swap' table.
+    """
     def __init__(self, my_auth):
+        """Create an instance of database."""
         self.user = my_auth.user
         self.password = my_auth.password
         self.all_categories = self.find_categories()
@@ -23,6 +29,7 @@ class Database:
         self.find_associations_string()
 
     def find_categories(self):
+        """Find every category in the database."""
         my_categories = []
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
@@ -35,6 +42,7 @@ class Database:
         return my_categories
 
     def get_all_aliments_from_category(self, category):
+        """Find every aliment from a cateegory."""
         self.all_aliments_from_category = []
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
@@ -47,6 +55,7 @@ class Database:
         self.all_aliments_from_category_stringed = list_to_num_string(self.all_aliments_from_category)
 
     def get_aliment(self, aliment):
+        """Get a specific product informations."""
         self.this_aliment = ""
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
@@ -83,6 +92,7 @@ class Database:
         return product_by_id
 
     def get_all_substitutes(self, aliment, category, nutriscore):
+        """Find every substitutes for a given product."""
         self.all_substitutes = []
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
@@ -95,6 +105,7 @@ class Database:
         self.all_substitutes_stringed = list_to_num_string(self.all_substitutes)
 
     def get_this_substitute(self, aliment, alimentSubstitued):
+        """Get a specific substitute informations."""
         self.this_substitute = None
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
@@ -107,6 +118,7 @@ class Database:
         self.this_substitute_stringed = self.get_any_aliment_dict_to_string(self.this_substitute)
 
     def save_association(self, aliment, alimentSubstitued):
+        """Write an entry in the swap table."""
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
         add_swap = ("INSERT INTO Swap "
@@ -119,6 +131,9 @@ class Database:
         my_connection.close()
 
     def find_associations(self):
+        """Find every food/product association in the 
+        swap table.
+        """
         my_associations = []
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
         cursor = my_connection.cursor()
@@ -131,6 +146,7 @@ class Database:
         return my_associations
 
     def find_associations_string(self):
+        """Return a string of find_associations()"""
         self.all_associations_stringed = ""
         self.all_associations_list_stringed = []
         for i in range(1, len(self.all_associations) +1):
@@ -155,5 +171,3 @@ class Database:
         my_connection.commit()
         cursor.close()
         my_connection.close()
-
-    

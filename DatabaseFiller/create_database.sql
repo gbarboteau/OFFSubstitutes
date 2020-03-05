@@ -1,4 +1,4 @@
-SET NAMES utf8mb4_unicode_ci;
+SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS Swap;
 DROP TABLE IF EXISTS Aliment;
@@ -10,7 +10,7 @@ CREATE TABLE Category(
     category_url varchar(200) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY category_name (category_name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE Aliment (
     id int unsigned NOT NULL AUTO_INCREMENT,
@@ -23,7 +23,7 @@ CREATE TABLE Aliment (
     PRIMARY KEY (id),
     UNIQUE KEY product_name (product_name),
     CONSTRAINT fk_product_category FOREIGN KEY (product_category) REFERENCES Category(category_name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE Swap(
     id int unsigned NOT NULL AUTO_INCREMENT,
@@ -32,7 +32,7 @@ CREATE TABLE Swap(
     PRIMARY KEY (id),
     CONSTRAINT fk_aliment_id FOREIGN KEY (aliment_id) REFERENCES Aliment(id),
     CONSTRAINT fk_substitute_id FOREIGN KEY (substitute_id) REFERENCES Aliment(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO Category(category_name, category_url) VALUES
 ("Compotes", "https://fr.openfoodfacts.org/categorie/compotes"),

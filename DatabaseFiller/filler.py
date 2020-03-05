@@ -7,21 +7,22 @@ class Filler:
         self.my_data = my_data
 
     def put_it_in_tables(self):
-        for i in self.my_data:
-            print(i)
         my_connection = mysql.connector.connect(user=self.user, password=self.password, database='openfoodfacts')
 
-        cursor = my_connection.cursor()
+        cursor = my_connection.cursor(buffered=True)
 
         for i in self.my_data:
+            prod_name = i['product_name']
 
-            add_aliment = ("INSERT INTO aliment "
-                   "(product_name, product_description, barcode, nutritional_score, stores, product_category) "
-                   "VALUES (%s, %s, %s, %s, %s, %s)")
+            try:
+                add_aliment = ("INSERT INTO aliment "
+                       "(product_name, product_description, barcode, nutritional_score, stores, product_category) "
+                       "VALUES (%s, %s, %s, %s, %s, %s)")
 
-            data_aliment = (i['product_name'], i['product_description'], i['barcode'], i['nutritional_score'], i['stores'], i['product_category'])
-
-            cursor.execute(add_aliment, data_aliment)
+                data_aliment = (i['product_name'], i['product_description'], i['barcode'], i['nutritional_score'], i['stores'], i['product_category'])
+                cursor.execute(add_aliment, data_aliment)
+            except mysql.connector.IntegrityError:
+                pass 
 
         my_connection.commit()
 

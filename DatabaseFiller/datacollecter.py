@@ -2,7 +2,7 @@ import requests
 import json
 import mysql.connector
 
-import cleandata, util
+import util
 
 class DataCollecter:
     def __init__(self, my_auth):
